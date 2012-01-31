@@ -16,16 +16,16 @@
     (datum->syntax lexenv (map f (syntax->datum syn))))
 
   (define (funs/str->int/f syn)
-    (syntax-case syn ()
-      [(_ name ...)
-       (with-syntax ([(external-name ...)
-                      (map-syntax #f symbol->string #'(name ...))])
-         
+    (with-syntax ([(_ name ...) syn]
+                  [(_ external-name ...)
+                   (map-syntax #f symbol->string syn)])
+
          ;; meta 0
          #'(begin
              (define libc (ffi-lib "libc" "6"))
              (define name (get-ffi-obj 'external-name libc (_fun _string -> _int)))
-             ...))]))
+             ...)
+         ))
   )
 
 ;; meta 1

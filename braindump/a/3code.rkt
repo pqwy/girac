@@ -9,3 +9,4 @@
            "floccinaucinihilipilificate"
            "prijestolonasljednikovica")])
   (printf "[~s : ~s] ~s~n" s (strlen s) (atoi s)))
+
